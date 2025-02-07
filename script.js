@@ -1,75 +1,86 @@
-let isWithdrawPending = false; // নতুন উইথড্র ব্লক করার জন্য ভেরিয়েবল
+document.addEventListener("DOMContentLoaded", function () {
+    let selectedAmount = null;
+    let selectedPayment = null;
+    let withdrawPending = false; // একবার উইথড্র দেওয়া হলে পরবর্তী অনুরোধ বন্ধ করতে
 
-// টাকা সিলেকশন
-document.querySelectorAll('.amount').forEach(amount => {
-    amount.addEventListener('click', function() {
-        document.querySelectorAll('.amount').forEach(a => a.classList.remove('selected'));
-        this.classList.add('selected');
-    });
-});
-
-// পেমেন্ট সিলেকশন
-document.querySelectorAll('.payment').forEach(payment => {
-    payment.addEventListener('click', function() {
-        document.querySelectorAll('.payment').forEach(p => p.classList.remove('selected'));
-        this.classList.add('selected');
-    });
-});
-
-// Telegram Bot Info (আপনার Bot Token ও Chat ID এখানে দিন)
-const BOT_TOKEN = "YOUR_BOT_TOKEN";
-const CHAT_ID = "YOUR_CHAT_ID";
-const TELEGRAM_API = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-
-// উইথড্র বাটন
-document.getElementById('withdrawBtn').addEventListener('click', function() {
-    if (isWithdrawPending) {
-        alert("❌ আপনি ইতিমধ্যে একটি উইথড্র দিয়েছেন! পেন্ডিং রিকুয়েস্ট কমপ্লিট না হওয়া পর্যন্ত নতুন উইথড্র দিতে পারবেন না।");
-        return;
-    }
-
-    let selectedAmount = document.querySelector('.amount.selected')?.textContent || "";
-    let selectedPayment = document.querySelector('.payment.selected')?.textContent || "";
-    let telegramUsername = document.getElementById('telegramUsername').value;
-    let phoneNumber = document.getElementById('phoneNumber').value;
-
-    if (!selectedAmount || !selectedPayment || !telegramUsername || !phoneNumber) {
-        alert("সব তথ্য পূরণ করুন!");
-        return;
-    }
-
-    let message = `📢 *নতুন উইথড্র রিকুয়েস্ট*\n\n💰 পরিমাণ: ${selectedAmount}\n💳 পেমেন্ট: ${selectedPayment}\n📞 ফোন: ${phoneNumber}\n🆔 টেলিগ্রাম: @${telegramUsername}\n🔄 স্ট্যাটাস: *Pending*`;
-
-    // Telegram এ পাঠানো
-    fetch(TELEGRAM_API, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: CHAT_ID, text: message, parse_mode: "Markdown" })
-    });
-
-    // UI তে দেখানো
-    let listItem = document.createElement('li');
-    listItem.innerHTML = `${selectedAmount} - ${selectedPayment} <span class="pending"> (Pending) </span> 
-        <button class="cancelBtn">❌ বাতিল করুন</button>`;
-    document.getElementById('withdrawList').appendChild(listItem);
-
-    isWithdrawPending = true; // নতুন উইথড্র ব্লক করা হলো
-
-    alert("✅ উইথড্র রিকুয়েস্ট পাঠানো হয়েছে!");
-
-    // ক্যান্সেল বাটন হ্যান্ডলিং
-    listItem.querySelector('.cancelBtn').addEventListener('click', function() {
-        let cancelMessage = `⚠️ *উইথড্র রিকুয়েস্ট বাতিল করা হয়েছে!*\n\n💰 পরিমাণ: ${selectedAmount}\n💳 পেমেন্ট: ${selectedPayment}`;
-        
-        // Telegram এ পাঠানো
-        fetch(TELEGRAM_API, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ chat_id: CHAT_ID, text: cancelMessage, parse_mode: "Markdown" })
+    // টাকার অপশন সিলেক্ট করা
+    document.querySelectorAll(".amount").forEach(item => {
+        item.addEventListener("click", function () {
+            if (!withdrawPending) {
+                document.querySelectorAll(".amount").forEach(el => el.classList.remove("selected"));
+                this.classList.add("selected");
+                selectedAmount = this.textContent.trim();
+            }
         });
+    });
 
-        alert("⚠️ উইথড্র বাতিল করা হয়েছে!");
-        listItem.remove();
-        isWithdrawPending = false; // নতুন উইথড্র দেওয়া যাবে
+    // পেমেন্ট অপশন সিলেক্ট করা
+    document.querySelectorAll(".payment").forEach(item => {
+        item.addEventListener("click", function () {
+            if (!withdrawPending) {
+                document.querySelectorAll(".payment").forEach(el => el.classList.remove("selected"));
+                this.classList.add("selected");
+                selectedPayment = this.textContent.trim();
+            }
+        });
+    });
+
+    // উইথড্র বাটন ক্লিক ইভেন্ট
+    document.getElementById("withdrawBtn").addEventListener("click", function () {
+        if (withdrawPending) {
+            alert("আপনি ইতিমধ্যে একটি উইথড্র অনুরোধ পাঠিয়েছেন! অনুগ্রহ করে অপেক্ষা করুন।");
+            return;
+        }
+
+        let username = document.getElementById("username").value.trim();
+        let phone = document.getElementById("phone").value.trim();
+
+        if (!selectedAmount || !selectedPayment || !username || !phone) {
+            alert("অনুগ্রহ করে সব তথ্য পূরণ করুন!");
+            return;
+        }
+
+        withdrawPending = true; // নতুন অনুরোধ বন্ধ করতে
+
+        // **Sparkle Effect যুক্ত করা**
+        let button = this;
+        for (let i = 0; i < 10; i++) {
+            let sparkle = document.createElement("div");
+            sparkle.classList.add("sparkle");
+            sparkle.style.left = `${Math.random() * button.clientWidth}px`;
+            sparkle.style.top = `${Math.random() * button.clientHeight}px`;
+            button.appendChild(sparkle);
+
+            setTimeout(() => sparkle.remove(), 500); // 0.5 সেকেন্ড পর মুছে যাবে
+        }
+
+        // উইথড্র রিকোয়েস্ট কনফার্মেশন
+        setTimeout(() => {
+            alert("✅ আপনার উইথড্র অনুরোধ সফলভাবে পাঠানো হয়েছে!");
+            document.getElementById("withdrawRequests").innerHTML += 
+                `<p>${username} - ${phone} - ${selectedAmount}৳ - ${selectedPayment} <span class="pending">[Pending]</span> 
+                <button class="cancelBtn">বাতিল করুন</button></p>`;
+        }, 1000);
+
+        // **টেলিগ্রামে উইথড্র রিকোয়েস্ট পাঠানো**
+        let botToken = "YOUR_BOT_TOKEN"; // আপনার টেলিগ্রাম বট টোকেন
+        let chatId = "YOUR_CHAT_ID"; // আপনার টেলিগ্রাম চ্যানেল বা গ্রুপ আইডি
+        let message = `📌 নতুন উইথড্র রিকোয়েস্ট:\n\n👤 ইউজার: ${username}\n📞 নাম্বার: ${phone}\n💰 পরিমাণ: ${selectedAmount}৳\n🏦 পেমেন্ট: ${selectedPayment}`;
+
+        fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`);
+
+        // **উইথড্র বাতিল করার ব্যবস্থা**
+        setTimeout(() => {
+            document.querySelectorAll(".cancelBtn").forEach(button => {
+                button.addEventListener("click", function () {
+                    this.parentElement.remove();
+                    withdrawPending = false; // নতুন উইথড্র অনুমতি দেওয়া
+
+                    // **টেলিগ্রামে বাতিলের নোটিফিকেশন পাঠানো**
+                    let cancelMessage = `❌ উইথড্র বাতিল:\n\n👤 ইউজার: ${username}\n📞 নাম্বার: ${phone}\n💰 পরিমাণ: ${selectedAmount}৳\n🏦 পেমেন্ট: ${selectedPayment}`;
+                    fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(cancelMessage)}`);
+                });
+            });
+        }, 1000);
     });
 });
