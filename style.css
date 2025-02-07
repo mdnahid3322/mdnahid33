@@ -1,95 +1,61 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
 }
 
-/* স্ক্রলিং টেক্সট */
-.marquee {
-    background: #ff6600;
-    color: white;
-    padding: 10px;
+h1 {
+    color: #2c3e50;
+}
+
+marquee {
     font-weight: bold;
-    white-space: nowrap;
+    color: red;
 }
 
-/* উইথড্র বক্স */
-.withdraw-box {
-    background: white;
-    padding: 20px;
-    width: 90%;
-    max-width: 400px;
-    margin: 20px auto;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-}
-
-/* টাকা সিলেকশন */
-.amount-options, .payment-options {
+.amount-container, .payment-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 15px;
     margin: 10px 0;
 }
 
 .amount, .payment {
-    padding: 15px;
+    padding: 10px 20px;
+    border: 2px solid gray;
     border-radius: 5px;
     cursor: pointer;
-    transition: 0.3s;
 }
 
-.amount {
-    background: #ddd;
-}
-
-.payment {
-    background: #eee;
-}
-
-/* সিলেকশন কালার */
 .amount.selected, .payment.selected {
-    background: #ff6600;
+    background-color: #3498db;
     color: white;
-    font-weight: bold;
+    border-color: #2980b9;
 }
 
-/* ইনপুট ফিল্ড */
 input {
-    width: 90%;
-    padding: 10px;
-    margin: 5px 0;
+    display: block;
+    margin: 10px auto;
+    padding: 8px;
+    width: 80%;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-/* উইথড্র বাটন */
-#withdrawBtn {
-    background: #28a745;
+button {
+    padding: 10px 20px;
+    background-color: green;
     color: white;
-    padding: 15px;
+    font-size: 16px;
     border: none;
-    border-radius: 5px;
     cursor: pointer;
-    font-size: 18px;
-    transition: 0.3s;
-}
-
-#withdrawBtn:hover {
-    background: #218838;
-}
-
-/* উইথড্র লিস্ট */
-#withdrawList {
-    list-style: none;
-    padding: 0;
-}
-
-#withdrawList li {
-    background: #f8d7da;
-    padding: 10px;
-    margin: 5px 0;
     border-radius: 5px;
+}
+
+button:disabled {
+    background-color: gray;
+}
+
+.pending {
+    color: orange;
     font-weight: bold;
-  }
+}
