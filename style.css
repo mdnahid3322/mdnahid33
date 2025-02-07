@@ -104,3 +104,21 @@ button:active {
     color: red;
     font-weight: bold;
 }
+
+/* 🔹 ছোট ক্যান্সেল বাটন */
+.cancel-btn {
+    padding: 8px 15px; /* আগের চেয়ে ছোট */
+    font-size: 14px; /* টেক্সট সাইজ ছোট */
+    background: #ff0000; /* লাল রঙ */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* 🔹 ক্যান্সেল বাটন প্রেস ইফেক্ট */
+.cancel-btn:active {
+    background: darkred;
+    transform: scale(0.95);
+    }
