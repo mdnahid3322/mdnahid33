@@ -15,41 +15,6 @@ body {
     white-space: nowrap;
 }
 
-/* মেনু ও সাইডবার */
-.topbar {
-    text-align: right;
-    padding: 10px;
-}
-
-#menuBtn {
-    font-size: 24px;
-    cursor: pointer;
-}
-
-#sidebar {
-    width: 250px;
-    height: 100%;
-    position: fixed;
-    left: -250px;
-    top: 0;
-    background: #222;
-    color: white;
-    padding: 20px;
-    transition: 0.3s;
-}
-
-#sidebar.show {
-    left: 0;
-}
-
-#closeSidebar {
-    cursor: pointer;
-    background: red;
-    border: none;
-    color: white;
-    padding: 5px;
-}
-
 /* উইথড্র বক্স */
 .withdraw-box {
     background: white;
