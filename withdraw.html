@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdrawal Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- স্ক্রলিং টেক্সট -->
+    <marquee class="marquee">উইথড্র করতে আপনার পরিমাণ ও পেমেন্ট মাধ্যম সিলেক্ট করুন, তারপর টেলিগ্রাম ইউজারনেম ও ফোন নম্বর দিন।</marquee>
+
+    <!-- মেনু ও সাইডবার -->
+    <div class="topbar">
+        <button id="menuBtn">🟰</button>
+    </div>
+    <div id="sidebar">
+        <button id="closeSidebar">✖</button>
+        <p>Sidebar Content</p>
+    </div>
+
+    <!-- উইথড্র ফর্ম -->
+    <div class="withdraw-box">
+        <h2>উইথড্র করুন</h2>
+
+        <!-- টাকা নির্বাচন -->
+        <div class="amount-section">
+            <h3>পরিমাণ নির্বাচন করুন:</h3>
+            <div class="amount-options">
+                <div class="amount" data-value="200">200৳</div>
+                <div class="amount" data-value="300">300৳</div>
+                <div class="amount" data-value="500">500৳</div>
+                <div class="amount" data-value="1000">1000৳</div>
+            </div>
+        </div>
+
+        <!-- পেমেন্ট মাধ্যম নির্বাচন -->
+        <div class="payment-section">
+            <h3>পেমেন্ট মাধ্যম নির্বাচন করুন:</h3>
+            <div class="payment-options">
+                <div class="payment" data-method="Bkash">বিকাশ</div>
+                <div class="payment" data-method="Nagad">নগদ</div>
+                <div class="payment" data-method="Rocket">রকেট</div>
+            </div>
+        </div>
+
+        <!-- ইনপুট ফিল্ড -->
+        <input type="text" id="telegramUsername" placeholder="টেলিগ্রাম ইউজারনেম">
+        <input type="text" id="phoneNumber" placeholder="ফোন নম্বর">
+
+        <!-- উইথড্র বাটন -->
+        <button id="withdrawBtn">উইথড্র করুন</button>
+
+        <!-- উইথড্র লিস্ট -->
+        <h3>আপনার উইথড্র রিকুয়েস্ট</h3>
+        <ul id="withdrawList"></ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
