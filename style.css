@@ -1,20 +1,18 @@
+/* 🔹 পুরো পেজের ব্যাকগ্রাউন্ড */
 body {
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
-}
-
-h1 {
-    color: #2c3e50;
-    margin-top: 20px;
-}
-
-marquee {
-    font-weight: bold;
+    background: linear-gradient(45deg, #222, #333, #444);
     color: white;
-    background-color: red;
+}
+
+/* 🔹 নির্দেশনা বার */
+.header marquee {
+    font-weight: bold;
+    color: yellow;
+    background: red;
     padding: 10px;
     font-size: 16px;
     border-radius: 5px;
@@ -22,85 +20,87 @@ marquee {
     width: 100%;
 }
 
+/* 🔹 উইথড্র কার্ড */
+.withdraw-card {
+    background: white;
+    color: black;
+    width: 90%;
+    max-width: 350px;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 5px 10px rgba(255, 255, 255, 0.2);
+}
+
+/* 🔹 টাকা ও পেমেন্ট অপশন */
 .amount-container, .payment-container {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 10px;
     margin: 10px 0;
 }
 
 .amount, .payment {
-    padding: 10px 20px;
+    padding: 10px 15px;
     border: 2px solid gray;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 18px;
+    transition: 0.3s;
+    background: #eee;
+}
+
+.amount:hover, .payment:hover {
+    background: #ddd;
 }
 
 .amount.selected, .payment.selected {
-    background-color: #3498db;
+    background: #28a745;
     color: white;
-    border-color: #2980b9;
+    border-color: #218838;
+    font-weight: bold;
+    box-shadow: 0 3px 8px rgba(0, 255, 0, 0.5);
 }
 
+/* 🔹 ইনপুট ডিজাইন */
 input {
     display: block;
     margin: 10px auto;
-    padding: 8px;
-    width: 80%;
+    padding: 10px;
+    width: 90%;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 6px;
     font-size: 16px;
 }
 
+/* 🔹 উইথড্র বাটন */
 button {
     padding: 12px 25px;
-    background-color: green;
+    background: #ff3b3b;
     color: white;
     font-size: 18px;
     border: none;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 8px;
     margin-top: 10px;
     position: relative;
     overflow: hidden;
-    transition: background 0.3s, transform 0.2s;
+    transition: 0.3s;
 }
 
-/* বাটন চাপ দিলে রঙ পরিবর্তন হবে */
+/* 🔹 প্রেস ইফেক্ট */
 button:active {
-    background-color: darkgreen;
+    background: darkred;
     transform: scale(0.95);
 }
 
-/* Sparkle Effect */
-.sparkle {
-    position: absolute;
-    width: 5px;
-    height: 5px;
-    background-color: yellow;
-    border-radius: 50%;
-    opacity: 0;
-    animation: sparkleAnimation 0.5s linear;
-}
-
-@keyframes sparkleAnimation {
-    0% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(-20px) scale(1.5);
-    }
-}
-
-button:disabled {
-    background-color: gray;
-    cursor: not-allowed;
-}
-
+/* 🔹 রিকোয়েস্ট স্ট্যাটাস */
 .pending {
     color: orange;
+    font-weight: bold;
+}
+
+.canceled {
+    color: red;
     font-weight: bold;
 }
