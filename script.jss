@@ -1,13 +1,5 @@
 let isWithdrawPending = false; // নতুন উইথড্র ব্লক করার জন্য ভেরিয়েবল
 
-document.getElementById('menuBtn').addEventListener('click', function() {
-    document.getElementById('sidebar').classList.add('show');
-});
-
-document.getElementById('closeSidebar').addEventListener('click', function() {
-    document.getElementById('sidebar').classList.remove('show');
-});
-
 // টাকা সিলেকশন
 document.querySelectorAll('.amount').forEach(amount => {
     amount.addEventListener('click', function() {
