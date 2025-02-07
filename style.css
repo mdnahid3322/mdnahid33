@@ -1,15 +1,25 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
 }
 
 h1 {
     color: #2c3e50;
+    margin-top: 20px;
 }
 
 marquee {
     font-weight: bold;
-    color: red;
+    color: white;
+    background-color: red;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
 }
 
 .amount-container, .payment-container {
@@ -24,6 +34,7 @@ marquee {
     border: 2px solid gray;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 18px;
 }
 
 .amount.selected, .payment.selected {
@@ -39,20 +50,54 @@ input {
     width: 80%;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 16px;
 }
 
 button {
-    padding: 10px 20px;
+    padding: 12px 25px;
     background-color: green;
     color: white;
-    font-size: 16px;
+    font-size: 18px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    margin-top: 10px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s, transform 0.2s;
+}
+
+/* বাটন চাপ দিলে রঙ পরিবর্তন হবে */
+button:active {
+    background-color: darkgreen;
+    transform: scale(0.95);
+}
+
+/* Sparkle Effect */
+.sparkle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: yellow;
+    border-radius: 50%;
+    opacity: 0;
+    animation: sparkleAnimation 0.5s linear;
+}
+
+@keyframes sparkleAnimation {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px) scale(1.5);
+    }
 }
 
 button:disabled {
     background-color: gray;
+    cursor: not-allowed;
 }
 
 .pending {
